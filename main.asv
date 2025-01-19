@@ -1,0 +1,31 @@
+clear all;
+clc;
+
+load('sections.mat');
+n = size(sections,1);
+flag = 0;
+
+i=2;
+while(i<=n)
+    j = sections(i,2);
+    x1 = sections(i,1);
+    x2 = sections(i+j,1);
+    for t=1:j
+        array(1,1)=x2-x1;
+        array(1,2)=0;
+        array()
+    end
+    i = i+j;
+end
+
+mal2 = ma_l(file,2); % write compiled file with degree
+mal1 = ma_l(file,1);
+LCF = mal2/mal1;
+mav2 = ma_v(file,2);
+mav1 = ma_v(file,1);
+VCF = mav2/mav1;
+LCB = 
+
+
+
+
