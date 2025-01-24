@@ -70,7 +70,7 @@ end
 
 %disp(size(delx));
 
-[VCB,LCB,LCF] = vcb(megaarray,delx,xarray,t_i,z_i);
+[VCB,LCB,LCF] = hydrostatic(megaarray,delx,xarray,t_i,z_i);
 
 fprintf('VCB = %d\n', VCB);
 fprintf('LCB = %d\n', LCB);
