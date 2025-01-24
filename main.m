@@ -11,11 +11,9 @@ ns = sections(1,1); %no. of sections
 z_i = input("z_i = ");
 t_i = zeros(ns,1);
 delx = zeros(ns-1,1);
-%disp(size(delx));
 flag=0;
 xarray = zeros(ns,1);
-while(i+j<=n)
-    %disp(i);   
+while(i+j<=n)   
     array = zeros(100,2);
     j = sections(i,2);
     
@@ -24,11 +22,6 @@ while(i+j<=n)
     x2 = sections(i+j+1,1);
     end
     xarray(k) = sections(i,1);
-    %disp(j);
-    %disp(x2);
-            if k == 107
-            disp("Hell naw");
-        end
     delx(k) = x2-x1;
     for t=1:j-1
 
@@ -39,14 +32,6 @@ while(i+j<=n)
         if ((array(t+1,1)>=z_i)&&(array(t,1)<=z_i))
             t_i(k) = t;
             flag = 1;
-            % if((k==23))
-            %     disp(array(t+1,2));
-            %     disp(array(t+1,2));
-            %     disp(z_i);
-            %     disp(t);
-            %     disp(j);
-            %     disp(i);
-            % end
             break;
         elseif (((array(t+1,1)<z_i)&&(array(t,1)<z_i)))
             t_i(k) = t;                    
@@ -64,23 +49,14 @@ while(i+j<=n)
     k = k+1;
 
     i = i+j+1;
-    %disp(size(delx));
 end
 
+[VCB,LCB,LCF,Disp] = hydrostatic(megaarray,delx,xarray,t_i,z_i);
 
-%disp(size(delx));
-
-[VCB,LCB,LCF] = hydrostatic(megaarray,delx,xarray,t_i,z_i);
-
+fprintf('Displacement = %d\n', Disp);
 fprintf('VCB = %d\n', VCB);
 fprintf('LCB = %d\n', LCB);
 fprintf('LCF = %d\n', LCF);
-% mal1 = ma_l(file,1);
-% LCF = mal2/mal1;
-% mav2 = ma_v(file,2);
-% mav1 = ma_v(file,1);
-% VCF = mav2/mav1;
-% LCB = 
 
 
 
