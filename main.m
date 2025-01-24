@@ -11,9 +11,10 @@ ns = sections(1,1); %no. of sections
 z_i = input("z_i = ");
 t_i = zeros(ns,1);
 delx = zeros(ns-1,1);
+%disp(size(delx));
 flag=0;
 xarray = zeros(ns,1);
-while(i+j+1<=n+1)
+while(i+j<=n)
     %disp(i);   
     array = zeros(100,2);
     j = sections(i,2);
@@ -25,9 +26,12 @@ while(i+j+1<=n+1)
     xarray(k) = sections(i,1);
     %disp(j);
     %disp(x2);
-
+            if k == 107
+            disp("Hell naw");
+        end
     delx(k) = x2-x1;
     for t=1:j-1
+
         array(t,1)=sections(t+i,1);
         array(t,2)=sections(t+i,2);
         array(t+1,1)=sections(t+i+1,1);
@@ -54,14 +58,23 @@ while(i+j+1<=n+1)
     end
     flag = 0;
     megaarray(:,:,k) = array;
+    if(k==ns-1)  
+        break;
+    end
     k = k+1;
+
     i = i+j+1;
+    %disp(size(delx));
 end
 
 
+%disp(size(delx));
 
+[VCB,LCB,LCF] = vcb(megaarray,delx,xarray,t_i,z_i);
 
-[VCB] = vcb(megaarray,delx,xarray,t_i,z_i); % write compiled file with degree
+fprintf('VCB = %d\n', VCB);
+fprintf('LCB = %d\n', LCB);
+fprintf('LCF = %d\n', LCF);
 % mal1 = ma_l(file,1);
 % LCF = mal2/mal1;
 % mav2 = ma_v(file,2);

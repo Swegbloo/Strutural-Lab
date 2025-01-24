@@ -1,7 +1,8 @@
-function [VCB] = vcb(megaarray,delx,x,t_i,z_i)
+function [VCB,LCB,LCF] = hydrostatic(megaarray,delx,x,t_i,z_i)
 ns = size(megaarray,3);
 sum_zy = zeros(2,1);
-sum_xyz = zeros(2,1);
+sum_v = zeros(3,1);
+sum_a = zeros(2,1);
     for i = 1:ns
         if t_i(i,1)>0
             y_t = megaarray(t_i(i,1),2,i)+(megaarray(t_i(i,1)+1,2,i)-megaarray(t_i(i,1),2,i))/(megaarray(t_i(i,1)+1,1,i)-megaarray(t_i(i,1),1,i))*(z_i-megaarray(t_i(i,1),1,i));
@@ -20,8 +21,16 @@ sum_xyz = zeros(2,1);
             if(sum_zy(1)==0)
                 break;
             end
-            sum_xyz(2) = sum_xyz(2) + delx(i)*(sum_zy(2)/sum_zy(1))*x(i);
-            sum_xyz(1) = sum_xyz(1) + delx(i)*(sum_zy(2)/sum_zy(1));
+            if i<=ns-1
+                sum_v(3) = sum_v(3) + delx(i)*sum_zy(1)*0.5*(x(i)+x(i+1));
+                sum_v(2) = sum_v(2) + delx(i)*sum_zy(2);
+                sum_v(1) = sum_v(1) + delx(i)*sum_zy(1);
+            end
+            if i>1
+                sum_a(1) = sum_a(1) + (y_t+y_t_prev)*delx(i-1);
+                sum_a(2) = sum_a(2) + 0.5*(x(i)+x(i+1))*(y_t+y_t_prev)*delx(i-1);
+            end
+            y_t_prev = y_t;
             %disp(sum_zy)
             % if (sum_zy(2)==-inf)
             %     disp(i);
@@ -30,5 +39,7 @@ sum_xyz = zeros(2,1);
             sum_zy(1) = 0;
         end
     end
-    VCB = sum_xyz(2)/sum_xyz(1);
+    VCB = sum_v(2)/sum_v(1);
+    LCB = sum_v(3)/sum_v(1);
+    LCF = sum_a(2)/sum_a(1);
 end
