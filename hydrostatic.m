@@ -16,8 +16,8 @@ sum_a = zeros(2,1);
             sum_zy(2) = sum_zy(2) + (0.5)^2*(megaarray(t_i(i,1),1,i)+z_i)*(-megaarray(t_i(i,1),1,i)+z_i)*(y_t+megaarray(t_i(i,1),2,i));%multiply z_i (for the linear line)
             sum_zy(1) = sum_zy(1) + 0.5*(-megaarray(t_i(i,1),1,i)+z_i)*(y_t+megaarray(t_i(i,1),2,i));
                     % if(sum_zy(2) == 0)
-            disp(t_i(i,1));
-            disp(y_t);
+            % disp(t_i(i,1));
+            % disp(y_t);
                     % end
             if(sum_zy(1)==0)
                 break;
@@ -40,8 +40,8 @@ sum_a = zeros(2,1);
             sum_zy(1) = 0;
         end
     end
-    Disp = sum_v(1);
-    VCB = sum_v(2)/sum_v(1);
-    LCB = sum_v(3)/sum_v(1);
-    LCF = sum_a(2)/sum_a(1);
+    Disp = sum_v(1)*2;
+    VCB = sum_v(2)/Disp;
+    LCB = sum_v(3)/Disp;
+    LCF = sum_a(2)/Disp;
 end

@@ -5,12 +5,12 @@ load('sections.mat'); %code restricted to 100 datapoints per section
 
 n = size(sections,1);
 
-megaarray = zeros(100,2,n);
+megaarray = zeros(100,2,106);
 i=2;
 j=0;
 k = 1;
 ns = sections(1,1); %no. of sections
-z_i = input("z_i = ");
+%z_i = input("z_i = ");
 t_i = zeros(ns,1);
 delx = zeros(ns-1,1);
 flag=0;
