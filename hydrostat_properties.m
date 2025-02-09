@@ -1,4 +1,4 @@
-function [VCB,LCB,LCF,Disp] = hydrostat_properties(z_i)
+function [VCB,LCB,LCF,Disp,I] = hydrostat_properties(z_i)
 
 load('sections.mat'); %code restricted to 100 datapoints per section
 
@@ -114,12 +114,13 @@ while(i+j<=n)
     i = i+j+1;
 end
 
-[VCB,LCB,LCF,Disp] = hydrostatic(megaarray,delx,xarray,t_i,z_i);
+[VCB,LCB,LCF,Disp,I] = hydrostatic(megaarray,delx,xarray,t_i,z_i);
 
 fprintf('Displacement = %d\n', Disp);
 fprintf('VCB = %d\n', VCB);
 fprintf('LCB = %d\n', LCB);
 fprintf('LCF = %d\n', LCF);
+fprintf('I = %d\n', I);
 
 
 

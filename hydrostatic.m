@@ -1,4 +1,4 @@
-function [VCB,LCB,LCF,Disp] = hydrostatic(megaarray,delx,x,t_i,z_i)
+function [VCB,LCB,LCF,Disp,I] = hydrostatic(megaarray,delx,x,t_i,z_i)
 ns = size(megaarray,3);
 sum_zy = zeros(2,1);
 sum_v = zeros(3,1);
@@ -55,4 +55,19 @@ sum_zy_prev = zeros(2,1);
     VCB = sum_v(2)*2/Disp;
     LCB = sum_v(3)*2/Disp;
     LCF = sum_a(2)/sum_a(1);
+    if isnan(LCF)
+        LCF = 0;
+    end
+    I=0;
+    flag = 0;
+    for i=1:ns
+        if t_i(i,1)>0
+            y_t = megaarray(t_i(i,1),2,i)+(megaarray(t_i(i,1)+1,2,i)-megaarray(t_i(i,1),2,i))/(megaarray(t_i(i,1)+1,1,i)-megaarray(t_i(i,1),1,i))*(z_i(i)-megaarray(t_i(i,1),1,i));
+            if flag == 1
+                I = I + (0.5)*((x(i)+x(i+1))/2-LCF)^2*(y_t+y_t_prev)*delx(i-1);
+            end
+            y_t_prev = y_t;
+            flag = 1;
+        end
+    end
 end
