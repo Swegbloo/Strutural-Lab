@@ -1,4 +1,8 @@
+
 clc;
+clear all;
+
+
 
 function [volume, lcg, tcg, vcg] = calculate_tank_properties(file_path, draft)
     % Reads section data and calculates volume, LCG, TCG, and VCG for a given draft.
@@ -262,7 +266,7 @@ vcgs = [];
 % Loop through the increments
 for i = 1:length(increments)
     % Call the function and store the results
-    [volume, lcg, tcg, vcg] = calculate_tank_properties('F.O.T.S.txt', increments(i));
+    [volume, lcg, tcg, vcg] = calculate_tank_properties('NO4CARGO.S_21NA30033.txt', increments(i));
     
     % Append the results to the arrays
     volumes = [volumes; volume];
